@@ -139,7 +139,7 @@ jobs:
             --upload-url="${UPLOAD_URL}" \
             --ssd-token="${SSD_TEAM_TOKEN}" \
             --source-code-path="${GITHUB_WORKSPACE}" \
-            --repository-url="https://github.com/${{ github.repository }} \
+            --repository-url="https://github.com/${{ github.repository }}" \
             --branch=${{ github.ref_name }} \
             --build-id=${{ github.run_id }} \
             --offline-mode=false \
@@ -194,4 +194,4 @@ jobs:
                      "service": "${{ inputs.image_name }}"
                    }
                  ]
-               }'         
+               }'
