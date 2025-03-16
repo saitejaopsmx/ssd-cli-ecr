@@ -190,7 +190,7 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}/${{ inputs.image_name }}:${{ inputs.image_tag }}",
+                     "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}",
                      "service": "${{ inputs.image_name }}"
                    }
                  ]
