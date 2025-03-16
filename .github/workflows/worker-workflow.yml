@@ -134,7 +134,7 @@ jobs:
             --scanners=trivy,semgrep,openssf \
             --trivy-scanners=codelicensescan,codesecretscan,sbom,imagelicensescan,imagesecretscan \
             --artifact-type="image" \
-            --artifact-name="${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}" \
+            --artifact-name="${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}" \
             --artifact-tag="${{ inputs.image_tag }}" \
             --upload-url="${UPLOAD_URL}" \
             --ssd-token="${SSD_TEAM_TOKEN}" \
