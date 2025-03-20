@@ -34,7 +34,11 @@ on:
         required: true
       JFROG_PASSWORD:
         required: true
-
+      UPLOAD_URL:
+        required: true
+      SSD_TEAM_TOKEN:
+        required: true
+        
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
