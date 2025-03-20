@@ -209,10 +209,10 @@ jobs:
                  "artifacts": [
                    {
                      "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}",
-                     "service": "alpine1"
+                     "service": "test-svc"
                    },
                    {
-                     "image": "memcached:bookworm",
+                     "image": "memcached:latest",
                      "service": "memcached"
                    }
                  ]
