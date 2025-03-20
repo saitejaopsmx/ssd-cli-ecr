@@ -222,7 +222,7 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "docker pull webgoat/webgoat:v2025.3",
+                     "image": "webgoat/webgoat:v2025.3",
                      "service": "webgoat"
                    },
                    {
