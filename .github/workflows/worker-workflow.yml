@@ -208,12 +208,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "trial451ad8.jfrog.io/dev-docker-docker/alpine1:alpine1-13880922455",
+                     "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}",
                      "service": "alpine1"
                    },
                    {
-                     "image": "trial451ad8.jfrog.io/dev-docker-docker/alpine2:alpine2-13880922455",
-                     "service": "alpine2"
+                     "image": "dockerbogo/docker-nginx-hello-world:latest",
+                     "service": "docker-nginx-hello-world"
                    }
                  ]
                }'
