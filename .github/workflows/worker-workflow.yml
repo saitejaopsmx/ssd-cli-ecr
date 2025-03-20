@@ -183,6 +183,7 @@ jobs:
           echo "Build User: ${{ github.actor }}"
           echo "Git URL: https://github.com/${{ github.repository }}"
           echo "Only Repository Name: ${{ github.event.repository.name }}"
+          echo "Organization: ${{ github.event.organization.login }}"
           echo "Git Branch: ${{ github.ref_name }}"
           echo "Artifact Image: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
           echo "Artifact Service: ${{ inputs.image_name }}"
