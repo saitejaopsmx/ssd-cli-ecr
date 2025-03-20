@@ -222,12 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "webgoat/webgoat:v2025.3",
-                     "service": "webgoat"
+                     "image": "webgoat/webgoat:v2025.2",
+                     "service": "webgoat-new"
                    },
                    {
-                     "image": "nginxdemos/hello:0.4",
-                     "service": "nginxdemos"
+                     "image": "nginxdemos/hello:0.4-plain-text",
+                     "service": "nginx-plaintext"
                    }
                  ]
                }'
