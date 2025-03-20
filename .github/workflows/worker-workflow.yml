@@ -222,12 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "webgoat/webgoat:v2025.2",
-                     "service": "webgoat-new"
+                     "image": "webgoat/webgoat:v2023.8",
+                     "service": "webgoat-8"
                    },
                    {
-                     "image": "nginxdemos/hello:0.4-plain-text",
-                     "service": "nginx-plaintext"
+                     "image": "springcommunity/spring-framework-petclinic:5.0.3",
+                     "service": "spring-framework-petclinic"
                    }
                  ]
                }'
