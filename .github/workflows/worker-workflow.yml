@@ -222,12 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}",
+                     "image": "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}",
                      "service": "test-svc"
                    },
                    {
-                     "image": "memcached:latest",
-                     "service": "memcached"
+                     "image": "memcached:1.6.37-bookworm",
+                     "service": "bookworm"
                    }
                  ]
                }'
