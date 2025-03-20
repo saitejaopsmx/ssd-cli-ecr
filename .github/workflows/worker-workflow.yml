@@ -212,8 +212,8 @@ jobs:
                      "service": "alpine1"
                    },
                    {
-                     "image": "dockerbogo/docker-nginx-hello-world:latest",
-                     "service": "docker-nginx-hello-world"
+                     "image": "memcached:bookworm",
+                     "service": "memcached"
                    }
                  ]
                }'
