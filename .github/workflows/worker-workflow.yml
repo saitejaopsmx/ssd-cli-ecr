@@ -172,7 +172,19 @@ jobs:
             echo "Security scan failed with exit code ${{ env.SCAN_EXIT_CODE }}"
             exit 1
           fi
-
+      
+      # Step-11-1: Print GitHub Environment Variables
+      - name: Print GitHub Environment Variables
+        run: |
+          echo "Job Name: ${{ github.workflow }}"
+          echo "Build Number: ${{ github.run_number }}"
+          echo "Job URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          echo "Git Commit: ${{ github.sha }}"
+          echo "Build User: ${{ github.actor }}"
+          echo "Git URL: https://github.com/${{ github.repository }}"
+          echo "Git Branch: ${{ github.ref_name }}"
+          echo "Artifact Image: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          echo "Artifact Service: ${{ inputs.image_name }}"
       # Step 12: Send Build Event to SSD
       - name: Send Build Event to SSD
         env:
