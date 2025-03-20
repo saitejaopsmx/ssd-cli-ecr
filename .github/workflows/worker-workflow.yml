@@ -127,6 +127,20 @@ jobs:
         run: |
           docker push "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
 
+      - name: Print GitHub Environment Variables
+        run: |
+          echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          echo "Registry: ${{ inputs.registry }}"
+          echo "Image Name: ${{ inputs.image_name }}"
+          echo "Artifact Tag: ${{ inputs.image_tag }}"
+          echo "Upload URL: ${UPLOAD_URL}"
+          echo "SSD Token: ${SSD_TEAM_TOKEN}"
+          echo "Source Code Path: ${GITHUB_WORKSPACE}"
+          echo "Repository URL: https://github.com/${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Build ID: ${{ github.run_id }}"
+
+
       # Run Source Code Scans with SSD Scanner CLI
       - name: Run Source Code Scans
         env:
