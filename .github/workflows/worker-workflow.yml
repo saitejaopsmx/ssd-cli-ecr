@@ -222,29 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "quay.io/opsmxpublic/supplychain-api:2025-01-00",
-                      "service": "supplychain-api"
+                      "image": "quay.io/opsmxpublic/ubi8-oes-autopilot:isd-spin-2025.03.00-f8d78a0d0-202503040820",
+                      "service": "oes-autopilot"
                   },
                   {
-                      "image": "quay.io/opsmxpublic/ssd-opa:2025-01-00",
-                      "service": "ssd-opa"
-                  },
-                  {
-                      "image": "quay.io/opsmxpublic/ssdgate:2025-01-00",
-                      "service": "ssdgate"
-                  },
-                  {
-                      "image": "quay.io/opsmxpublic/ssd-db:2024-05-00",
-                      "service": "ssd-db"
-                  },
-                  {
-                      "image": "quay.io/opsmxpublic/ratel:v21.12.0",
-                      "service": "ratel"
-                  },
-                  {
-                      "image": "quay.io/opsmxpublic/pgchecker:v1",
-                      "service": "pgchecker"
-                  }
-                  
+                      "image": "quay.io/opsmxpublic/ubi8-oes-dashboard:isd-spin-2025.03.00-1f557e1-202503040904",
+                      "service": "oes-dashboard"
+                  }                  
                  ]
                }'
