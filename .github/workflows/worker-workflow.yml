@@ -222,12 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "quay.io/opsmxpublic/ubi8-oes-autopilot:isd-spin-2025.03.00-f8d78a0d0-202503040820",
-                      "service": "oes-autopilot"
+                      "image": "quay.io/opsmxpublic/k8s-decoder:hal",
+                      "service": "k8s-decoder"
                   },
                   {
-                      "image": "quay.io/opsmxpublic/ubi8-oes-dashboard:isd-spin-2025.03.00-1f557e1-202503040904",
-                      "service": "oes-dashboard"
+                      "image": "quay.io/opsmxpublic/mobsf:2024-12-00",
+                      "service": "mobsf"
                   }                  
                  ]
                }'
