@@ -222,12 +222,29 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "docker.io/aswathyashok/ssd-github-code-scan:91",
-                      "service": "ssd-github-code-scan"
+                      "image": "quay.io/opsmxpublic/temporal-admin-tools:1.20.3",
+                      "service": "temporal-admin-tools"
                   },
                   {
-                      "image": "docker.io/aswathyashok/supplychain-preprocessor:v002",
-                      "service": "supplychain-preprocessor"
+                      "image": "quay.io/opsmxpublic/temporal-server:1.20.3",
+                      "service": "temporal-server"
+                  },
+                  {
+                      "image": "quay.io/opsmxpublic/temporal-ui:2.9.0",
+                      "service": "temporal-ui"
+                  },
+                  {
+                      "image": "quay.io/opsmxpublic/token-machine:2024-09-00",
+                      "service": "token-machine"
+                  },
+                  {
+                      "image": "quay.io/opsmxpublic/tool-chain:2025-01-00",
+                      "service": "tool-chain"
+                  },
+                  {
+                      "image": "quay.io/opsmxpublic/zap:2024-12-00",
+                      "service": "zap"
                   }
+                  
                  ]
                }'
