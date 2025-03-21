@@ -222,12 +222,12 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                     "image": "busybox:unstable-uclibc",
-                     "service": "busybox"
-                   },
-                   {
-                     "image": "httpd:bookworm",
-                     "service": "httpd"
-                   }
+                      "image": "dockerbogo/docker-nginx-hello-world:latest",
+                      "service": "docker-nginx-hello-world"
+                  },
+                  {
+                      "image": "docker.io/aswathyashok/projectmonitor:v1",
+                      "service": "test-113"
+                  }
                  ]
                }'
