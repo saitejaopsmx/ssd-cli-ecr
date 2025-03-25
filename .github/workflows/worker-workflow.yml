@@ -220,12 +220,8 @@ jobs:
                  "builduser": "${{ github.actor }}",
                  "giturl": "https://github.com/${{ github.repository }}",
                  "gitbranch": "${{ github.ref_name }}",
-                 "files": [
+                 "artifacts": [
                    {
-                      "file": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
-                      "service": "spring-petclinic1"
-                  },
-                  {
                       "uri": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
                       "service": "spring-petclinic5"
                   }                  
