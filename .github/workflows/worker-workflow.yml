@@ -210,7 +210,7 @@ jobs:
         env:
           SSD_URL: ${{ secrets.UPLOAD_URL }}
         run: |
-          curl --location "https://mar3.oea-dev.opsmx.net/webhook/v1/ssd" \
+          curl --location -v "https://mar3.oea-dev.opsmx.net/webhook/v1/ssd" \
                --header "Content-Type: application/json" \
                --data '{
                  "jobname": "${{ github.workflow }}",
