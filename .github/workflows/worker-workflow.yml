@@ -222,8 +222,24 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
-                      "service": "spring-petclinic"
+                      "url": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
+                      "service": "spring-petclinic1"
+                  },
+                  {
+                      "file": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
+                      "service": "spring-petclinic2"
+                  },
+                  {
+                      "filename": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
+                      "service": "spring-petclinic3"
+                  },
+                  {
+                      "filepath": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
+                      "service": "spring-petclinic4"
+                  },
+                  {
+                      "url": "trial451ad8.jfrog.io/artifactory/jar-repo/com/example/spring-petclinic/3.4.0/spring-petclinic-3.4.0-SNAPSHOT.jar",
+                      "service": "spring-petclinic5"
                   }                  
                  ]
                }'
