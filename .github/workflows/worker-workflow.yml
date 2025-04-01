@@ -138,9 +138,9 @@ jobs:
       - name: Print GitHub Environment Variables
         run: |
           #echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
-          echo "Artifact Name: ${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          echo "Artifact Name: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
           echo "Registry: ${{ inputs.registry }}"
-          echo "Image Name: ${{ inputs.image_name }}"
+          #echo "Image Name: ${{ inputs.image_name }}"
           echo "Artifact Tag: ${{ inputs.image_tag }}"
           echo "Upload URL: ${UPLOAD_URL}"
           echo "SSD Token: ${SSD_TEAM_TOKEN}"
@@ -161,7 +161,7 @@ jobs:
             --scanners=trivy,semgrep,openssf \
             --trivy-scanners=codelicensescan,codesecretscan,sbom,imagelicensescan,imagesecretscan \
             --artifact-type="image" \
-            --artifact-name="${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}" \
+            --artifact-name="${{ inputs.registry }}/${{ inputs.repository }}" \
             --artifact-tag="${{ inputs.image_tag }}" \
             --upload-url="${UPLOAD_URL}" \
             --ssd-token="${SSD_TEAM_TOKEN}" \
@@ -212,8 +212,8 @@ jobs:
           echo "Only Repository Name: ${{ github.event.repository.name }}"
           echo "Organization: ${{ github.event.organization.login }}"
           echo "Git Branch: ${{ github.ref_name }}"
-          echo "Artifact Image: ${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}"
-          echo "Artifact Service: ${{ inputs.image_name }}"
+          echo "Artifact Image: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
+          #echo "Artifact Service: ${{ inputs.image_name }}"
       # Step 12: Send Build Event to SSD
       - name: Send Build Event to SSD
         env:
@@ -231,7 +231,7 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}",
+                      "image": "${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}",
                    }
                  ]
                }'
