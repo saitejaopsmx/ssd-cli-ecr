@@ -36,7 +36,7 @@ on:
         required: true
       AWS_REGION:
         required: true
-      UPLOAD_URL:
+      SSD_URL:
         required: true
       SSD_TEAM_TOKEN:
         required: true
