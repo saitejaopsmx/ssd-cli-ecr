@@ -160,7 +160,7 @@ jobs:
             --artifact-type="image" \
             --artifact-name="${{ inputs.registry }}/${{ inputs.repository }}" \
             --artifact-tag="${{ inputs.image_tag }}" \
-            --upload-url="${UPLOAD_URL}" \
+            --upload-url="${{ secrets.UPLOAD_URL }}" \
             --ssd-token="${SSD_TEAM_TOKEN}" \
             --source-code-path="${GITHUB_WORKSPACE}" \
             --repository-url="https://github.com/${{ github.repository }}" \
