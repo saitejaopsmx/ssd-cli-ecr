@@ -221,7 +221,7 @@ jobs:
         env:
           SSD_URL: ${{ secrets.UPLOAD_URL }}
         run: |
-          curl --location -v "${{ secrets.UPLOAD_URL }}/webhook/v1/ssd" \
+          curl --location -v "https://portor-poc.oea-dev.opsmx.net/webhook/v1/ssd" \
                --header "Content-Type: application/json" \
                --data '{
                  "jobname": "${{ github.workflow }}",
