@@ -144,7 +144,7 @@ jobs:
           echo "Artifact Tag: ${{ inputs.image_tag }}"
           echo "Test Upload URL: $UPLOAD_URL"
           echo "Upload URL: ${{ secrets.UPLOAD_URL }}"
-          echo "SSD Token: ${SSD_TEAM_TOKEN}"
+          echo "SSD Token: ${{ secrets.SSD_TEAM_TOKEN }}"
           echo "Test SSD Token: ${SSD_TEAM_TOKEN}"
           echo "Source Code Path: ${GITHUB_WORKSPACE}"
           echo "Repository URL: https://github.com/${{ github.repository }}"
@@ -219,9 +219,9 @@ jobs:
       # Step 12: Send Build Event to SSD
       - name: Send Build Event to SSD
         env:
-          SSD_URL: ${{ secrets.UPLOAD_URL }}
+          SSD_URL: ${{ secrets.UPLOAD_URL }}/webhook/v1/ssd
         run: |
-          curl --location -v "https://portor-poc.oea-dev.opsmx.net/webhook/v1/ssd" \
+          curl --location -v "$SSD_URL" \
                --header "Content-Type: application/json" \
                --data '{
                  "jobname": "${{ github.workflow }}",
@@ -233,7 +233,7 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}",
+                      "image": "${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
                    }
                  ]
                }'
