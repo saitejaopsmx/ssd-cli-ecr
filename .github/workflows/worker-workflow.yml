@@ -133,7 +133,7 @@ jobs:
           tags: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}
 
       - name: Print GitHub Environment Variables
-        env:$
+        env:
           UPLOAD_URL: ${{ secrets.UPLOAD_URL }}
           SSD_TEAM_TOKEN: ${{ secrets.SSD_TEAM_TOKEN }}
         run: |
