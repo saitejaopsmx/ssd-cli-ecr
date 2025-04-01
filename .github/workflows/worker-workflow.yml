@@ -5,10 +5,10 @@ on:
   workflow_call:
     inputs:
       image_name:
-        required: true
+        required: false
         type: string
       context:
-        required: true
+        required: false
         type: string
       image_tag:
         required: true
@@ -26,18 +26,15 @@ on:
         required: false
         type: string
       artifactory_url:
-        required: true
+        required: false
         type: string
 
     secrets:
       AWS_ACCESS_KEY_ID:
-        description: 'aws user'
         required: true
       AWS_SECRET_ACCESS_KEY:
-        description: 'aws password'
         required: true
       AWS_REGION:
-        description: 'aws region'
         required: true
       UPLOAD_URL:
         required: true
