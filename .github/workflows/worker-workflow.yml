@@ -133,14 +133,19 @@ jobs:
           tags: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}
 
       - name: Print GitHub Environment Variables
+        env:$
+          UPLOAD_URL: ${{ secrets.UPLOAD_URL }}
+          SSD_TEAM_TOKEN: ${{ secrets.SSD_TEAM_TOKEN }}
         run: |
           #echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
           echo "Artifact Name: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
           echo "Registry: ${{ inputs.registry }}"
           #echo "Image Name: ${{ inputs.image_name }}"
           echo "Artifact Tag: ${{ inputs.image_tag }}"
-          echo "Upload URL: ${UPLOAD_URL}"
+          echo "Test Upload URL: $UPLOAD_URL"
+          echo "Upload URL: ${{ secrets.UPLOAD_URL }}"
           echo "SSD Token: ${SSD_TEAM_TOKEN}"
+          echo "Test SSD Token: ${SSD_TEAM_TOKEN}"
           echo "Source Code Path: ${GITHUB_WORKSPACE}"
           echo "Repository URL: https://github.com/${{ github.repository }}"
           echo "Branch: ${{ github.ref_name }}"
@@ -161,7 +166,7 @@ jobs:
             --artifact-name="${{ inputs.registry }}/${{ inputs.repository }}" \
             --artifact-tag="${{ inputs.image_tag }}" \
             --upload-url="${{ secrets.UPLOAD_URL }}" \
-            --ssd-token="${SSD_TEAM_TOKEN}" \
+            --ssd-token="${{ secrets.SSD_TEAM_TOKEN }}" \
             --source-code-path="${GITHUB_WORKSPACE}" \
             --repository-url="https://github.com/${{ github.repository }}" \
             --branch=${{ github.ref_name }} \
@@ -207,7 +212,7 @@ jobs:
           echo "Build User: ${{ github.actor }}"
           echo "Git URL: https://github.com/${{ github.repository }}"
           echo "Only Repository Name: ${{ github.event.repository.name }}"
-          echo "Organization: ${{ github.event.organization.login }}"
+          echo "Organization: ${{ input.organization }}"
           echo "Git Branch: ${{ github.ref_name }}"
           echo "Artifact Image: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
           #echo "Artifact Service: ${{ inputs.image_name }}"
@@ -216,7 +221,7 @@ jobs:
         env:
           SSD_URL: ${{ secrets.UPLOAD_URL }}
         run: |
-          curl --location -v "https://portor-poc.oea-dev.opsmx.net/webhook/v1/ssd" \
+          curl --location -v "${{ secrets.UPLOAD_URL }}/webhook/v1/ssd" \
                --header "Content-Type: application/json" \
                --data '{
                  "jobname": "${{ github.workflow }}",
