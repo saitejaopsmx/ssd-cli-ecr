@@ -10,13 +10,13 @@ on:
       context:
         required: true
         type: string
-      dockerfile_path:
-        required: true
-        type: string
       image_tag:
         required: true
         type: string
       registry:
+        required: true
+        type: string
+      repository:
         required: true
         type: string
       org:
@@ -30,9 +30,14 @@ on:
         type: string
 
     secrets:
-      JFROG_USERNAME:
+      AWS_ACCESS_KEY_ID:
+        description: 'aws user'
         required: true
-      JFROG_PASSWORD:
+      AWS_SECRET_ACCESS_KEY:
+        description: 'aws password'
+        required: true
+      AWS_REGION:
+        description: 'aws region'
         required: true
       UPLOAD_URL:
         required: true
@@ -111,25 +116,29 @@ jobs:
           echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
           echo "LOG_DIR=$LOG_DIR" >> $GITHUB_ENV
 
+      - name: Setup AWS ECR Details
+        uses:  aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
 
-
-      - name: Log in to JFrog Artifactory
-        run: |
-          echo "${{ secrets.JFROG_PASSWORD }}" | docker login -u "${{ secrets.JFROG_USERNAME }}" --password-stdin "${{ inputs.registry }}"
-
-      - name: Build Docker Image
-        run: |
-          docker build -t "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}" \
-          -f "${{ inputs.dockerfile_path }}" "${{ inputs.context }}"
-
-      - name: Push Image to JFrog
-        run: |
-          docker push "${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+      - name: Build, tag, and push docker image to Amazon ECR
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}
 
       - name: Print GitHub Environment Variables
         run: |
-          echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          #echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          echo "Artifact Name: ${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}"
           echo "Registry: ${{ inputs.registry }}"
           echo "Image Name: ${{ inputs.image_name }}"
           echo "Artifact Tag: ${{ inputs.image_tag }}"
@@ -152,7 +161,7 @@ jobs:
             --scanners=trivy,semgrep,openssf \
             --trivy-scanners=codelicensescan,codesecretscan,sbom,imagelicensescan,imagesecretscan \
             --artifact-type="image" \
-            --artifact-name="${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}" \
+            --artifact-name="${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}" \
             --artifact-tag="${{ inputs.image_tag }}" \
             --upload-url="${UPLOAD_URL}" \
             --ssd-token="${SSD_TEAM_TOKEN}" \
@@ -203,14 +212,14 @@ jobs:
           echo "Only Repository Name: ${{ github.event.repository.name }}"
           echo "Organization: ${{ github.event.organization.login }}"
           echo "Git Branch: ${{ github.ref_name }}"
-          echo "Artifact Image: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
+          echo "Artifact Image: ${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}"
           echo "Artifact Service: ${{ inputs.image_name }}"
       # Step 12: Send Build Event to SSD
       - name: Send Build Event to SSD
         env:
           SSD_URL: ${{ secrets.UPLOAD_URL }}
         run: |
-          curl --location -v "https://mar3.oea-dev.opsmx.net/webhook/v1/ssd" \
+          curl --location -v "https://portor-poc.oea-dev.opsmx.net/webhook/v1/ssd" \
                --header "Content-Type: application/json" \
                --data '{
                  "jobname": "${{ github.workflow }}",
@@ -222,12 +231,7 @@ jobs:
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
-                      "image": "quay.io/opsmxpublic/k8s-decoder:hal",
-                      "service": "k8s-decoder"
-                  },
-                  {
-                      "image": "quay.io/opsmxpublic/mobsf:2024-12-00",
-                      "service": "mobsf"
-                  }                  
+                      "image": "${{ inputs.registry }}/coindcx-repo/${{ inputs.image_name }}:${{ inputs.image_tag }}",
+                   }
                  ]
                }'
