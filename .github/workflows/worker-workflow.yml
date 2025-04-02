@@ -47,8 +47,8 @@ jobs:
 
     steps:
       # Checkout repository code
-      - name: Checkout repository code
-        uses: actions/checkout@v3
+      #- name: Checkout repository code
+      #  uses: actions/checkout@v3
 
       # Set up Python (for semgrep installation)
       - name: Set up Python
