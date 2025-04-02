@@ -13,7 +13,7 @@ jobs:
       image_tag: ${{ github.run_id }}
       repository: 'coindcx-repo'
       registry: '732813442182.dkr.ecr.us-east-1.amazonaws.com'
-      org: "portor"
+      org: "opsmx"
       application_tags: "v1.0"
 
     secrets:
