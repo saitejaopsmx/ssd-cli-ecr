@@ -10,7 +10,7 @@ jobs:
   build:
     uses: saitejaopsmx/ssd-cli-ecr/.github/workflows/worker-workflow.yml@main
     with:
-      image_tag: ${{ github.run_id }}
+      image_tag: '12929416117'
       repository: 'coindcx-repo'
       registry: '732813442182.dkr.ecr.us-east-1.amazonaws.com'
       org: "opsmx"
