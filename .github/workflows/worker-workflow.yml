@@ -228,6 +228,7 @@ jobs:
                  "gitcommit": "${{ github.sha }}",
                  "builduser": "${{ github.actor }}",
                  "giturl": "https://github.com/${{ github.repository }}",
+                 "tool": "githubactions",
                  "gitbranch": "${{ github.ref_name }}",
                  "artifacts": [
                    {
