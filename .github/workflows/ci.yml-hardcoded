@@ -8,17 +8,17 @@ on:
 
 jobs:
   build:
-    uses: saitejaopsmx/ssd-cli-ecr/.github/workflows/worker-workflow.yml@main
+    #uses: saitejaopsmx/ssd-cli-ecr/.github/workflows/worker-workflow.yml-cust@main
     with:
-      image_tag: ${{ github.run_id }}
+      image_tag: '12929416117'
       repository: 'coindcx-repo'
       registry: '732813442182.dkr.ecr.us-east-1.amazonaws.com'
       org: "opsmx"
       application_tags: "v1.0"
 
     secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      AWS_REGION: ${{ secrets.AWS_REGION }}
+      #AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #AWS_REGION: ${{ secrets.AWS_REGION }}
       SSD_URL: ${{ secrets.SSD_URL }}
       SSD_TEAM_TOKEN: ${{ secrets.SSD_TEAM_TOKEN }}      

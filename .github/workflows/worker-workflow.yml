@@ -4,6 +4,12 @@ name: Docker Build and Push
 on:
   workflow_call:
     inputs:
+      image_name:
+        required: false
+        type: string
+      context:
+        required: false
+        type: string
       image_tag:
         required: true
         type: string
@@ -19,8 +25,17 @@ on:
       application_tags:
         required: false
         type: string
+      artifactory_url:
+        required: false
+        type: string
 
     secrets:
+      AWS_ACCESS_KEY_ID:
+        required: true
+      AWS_SECRET_ACCESS_KEY:
+        required: true
+      AWS_REGION:
+        required: true
       SSD_URL:
         required: true
       SSD_TEAM_TOKEN:
@@ -98,6 +113,25 @@ jobs:
           echo "REPORT_DIR=$REPORT_DIR" >> $GITHUB_ENV
           echo "LOG_DIR=$LOG_DIR" >> $GITHUB_ENV
 
+      - name: Setup AWS ECR Details
+        uses:  aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag, and push docker image to Amazon ECR
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}
+
       - name: Print GitHub Environment Variables
         env:
           SSD_URL: ${{ secrets.SSD_URL }}
@@ -106,6 +140,7 @@ jobs:
           #echo "Artifact Name: ${{ inputs.registry }}/dev-docker-docker/${{ inputs.image_name }}:${{ inputs.image_tag }}"
           echo "Artifact Name: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
           echo "Registry: ${{ inputs.registry }}"
+          #echo "Image Name: ${{ inputs.image_name }}"
           echo "Artifact Tag: ${{ inputs.image_tag }}"
           echo "SSD URL: $SSD_URL"
           echo "SSD Token: $SSD_TEAM_TOKEN"
@@ -178,6 +213,7 @@ jobs:
           echo "Organization: ${{ inputs.org }}"
           echo "Git Branch: ${{ github.ref_name }}"
           echo "Artifact Image: ${{ inputs.registry }}/${{ inputs.repository }}:${{ inputs.image_tag }}"
+          #echo "Artifact Service: ${{ inputs.image_name }}"
       # Step 12: Send Build Event to SSD
       - name: Send Build Event to SSD
         env:
